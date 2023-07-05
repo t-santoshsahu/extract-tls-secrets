@@ -61,13 +61,13 @@ public class AgentMain {
 
   public static URL getJarFileOrClassFolder(Class<?> clz){
     URL path = clz.getProtectionDomain().getCodeSource().getLocation();
-    log.log(Level.INFO, "get class source location is " + path);
+    //log.log(Level.INFO, "get class source location is " + path);
     if (null == path)
     {
       //the class is loaded by Java Extension Class Loader, not System Class Loader, so try parse by full path
       String classFullName = clz.getName().replace('.', '/') + ".class";
       URL selfFullResourceUrl = clz.getClassLoader().getResource(classFullName);
-      log.log(Level.INFO, "selfFullResourceUrl=" + selfFullResourceUrl);
+      //log.log(Level.INFO, "selfFullResourceUrl=" + selfFullResourceUrl);
 
       if (null != selfFullResourceUrl){
         String strFullUrlPath = selfFullResourceUrl.toString();
@@ -86,11 +86,11 @@ public class AgentMain {
             endIndex = strRealUrl.length() - 2;
           }
           strRealUrl = strRealUrl.substring(startIndex, endIndex);
-          log.log(Level.INFO, "selfFullResourceUrl=" + selfFullResourceUrl);
+          //log.log(Level.INFO, "selfFullResourceUrl=" + selfFullResourceUrl);
           try {
             path = new URL(strRealUrl);
           } catch (MalformedURLException e) {
-            log.log(Level.WARNING, "generate URL failed, strRealUrl = " + strRealUrl, e);
+            //log.log(Level.WARNING, "generate URL failed, strRealUrl = " + strRealUrl, e);
             path = null;
           }
         }
@@ -139,7 +139,7 @@ public class AgentMain {
         MasterSecretCallback.setSecretsFileName(canonicalSecretsPath);
         inst.addTransformer(new Transformer(jarFile), true);
 
-        log.info("Successfully attached agent " + jarFile + ". Logging to " + canonicalSecretsPath + ". ");
+        //log.info("Successfully attached agent " + jarFile + ". Logging to " + canonicalSecretsPath + ". ");
     }
 
     private static void openBaseModule(Instrumentation inst) {

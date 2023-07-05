@@ -24,7 +24,11 @@ public class AttachHelper {
                 System.out.println("Successfully attached to process ID " + pid + ".");
             } catch (IllegalStateException e) {
                 String msg = e.getMessage() != null ? e.getMessage() : "Failed attaching to java process " + pid;
+                e.printStackTrace();
+                System.out.println(msg);
                 throw new MessageException(msg);
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
 
