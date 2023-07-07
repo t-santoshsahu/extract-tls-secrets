@@ -131,6 +131,9 @@ public class AgentMain {
     }
 
     private static void main(String agentArgs, Instrumentation inst, File jarFile) {
+        if (agentAlreadyLoaded(inst)) {
+            return;
+        }
         openBaseModule(inst);
 
         String canonicalSecretsPath = getCanonicalSecretsPath(agentArgs);
@@ -206,6 +209,14 @@ public class AgentMain {
             log.log(Level.WARNING, "Failed getting the canonical path for " + secretsFile, e);
             throw new IllegalStateException(e);
         }
+    }
+    public static boolean agentAlreadyLoaded(Instrumentation inst) {
+        for (Class<?> loadedClass : inst.getAllLoadedClasses()) {
+            if (loadedClass.getName().endsWith("name.neykov.secrets.MasterSecretCallback")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -2,12 +2,15 @@ package name.neykov.secrets;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;
+
+import javax.lang.model.type.ReferenceType;
 
 //Alternative when tools.jar not available
 //https://github.com/apangin/jattach
